@@ -1,5 +1,11 @@
-template-repository (1.0-1) unstable; urgency=medium
+python-railroad-diagrams (1.1.1-2) unstable; urgency=medium
 
-  * Initial release
+  * Source-only upload for testing migration.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Nilesh Patra <nilesh@debian.org>  Fri, 05 Aug 2022 09:06:31 +0530
+
+python-railroad-diagrams (1.1.1-1) unstable; urgency=medium
+
+  * Initial release (Closes: #1007713)
+
+ -- Nilesh Patra <nilesh@debian.org>  Tue, 15 Mar 2022 20:42:48 +0530

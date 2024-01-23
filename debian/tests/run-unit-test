@@ -1,0 +1,33 @@
+#!/bin/bash
+
+export LC_ALL=C.UTF-8
+if [ "${AUTOPKGTEST_TMP}" = "" ] ; then
+  AUTOPKGTEST_TMP=$(mktemp -d /tmp/${pkg}-test.XXXXXX)
+  trap "rm -rf ${AUTOPKGTEST_TMP}" 0 INT QUIT ABRT PIPE TERM
+fi
+
+cd "$AUTOPKGTEST_TMP"
+
+# Sample test script to create svg
+cat >test.py <<HERE
+from railroad import Diagram, Optional, Choice, NonTerminal
+d = Diagram(
+   Optional('+', 'skip'),
+   Choice(0,
+     NonTerminal('name-start char'),
+     NonTerminal('escape')))
+f = open('test.svg', 'w+')
+d.writeSvg(f.write)
+f.close()
+HERE
+
+
+python3 ./test.py
+
+# Ensure file is actually svg
+file test.svg | fgrep -q 'SVG'
+
+# Convert to png and test
+rsvg-convert -o test.png test.svg
+
+file test.png | fgrep -q 'PNG'
